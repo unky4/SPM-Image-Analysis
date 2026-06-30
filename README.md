@@ -157,3 +157,7 @@ Use `runs` for repeated task acquisitions. In this project, the old â€œsessionâ€
 - The toolbox can read `.nii` and `.nii.gz` inputs. Compressed files are copied and unzipped in the preprocessing output folder before SPM runs.
 - Keep project-specific SPM batch details in `spm_jobs/`.
 - Keep user-facing pipeline scripts in `pipelines/`.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
