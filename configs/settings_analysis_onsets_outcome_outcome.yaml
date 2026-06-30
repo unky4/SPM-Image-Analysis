@@ -1,0 +1,64 @@
+# Example first- and second-level analysis settings for SPM Image Analysis.
+#
+# The BIDS run entity is used for split task acquisitions. For example,
+# runs: [1, 2] means the code will look for run-01 and run-02 for each subject.
+
+resmem: true
+spmPath: "/media/Storage_HDD/Post_Doc/spm12/"
+saveRoot: "/media/Storage_HDD/Post_Doc/Painstorm/02_SPM_image_analysis/"
+nofSlicesToDiscard: 4
+
+bids:
+  enabled: true
+  root: "/media/Storage_HDD/Post_Doc/Painstorm/00_data/BIDS"
+  suffix: "bold"
+  runs: [1, 2]
+  subject_labels: []       # Optional: ["001", "002"]. Leave empty to use all sub-* folders.
+
+# Optional advanced BIDS filters. Uncomment only if needed to disambiguate files.
+# task: "painstorm"
+# space: "MNI152NLin2009cAsym"
+# desc: "preproc"
+
+first_level_analysis:
+  data_path: "/media/Storage_HDD/Post_Doc/Painstorm/00_data/04_Behaviour_in_stan_format/data_combined_all_image_analysis.csv"
+  nofSubjectsPerGroup: [17, 13, 17, 21]
+  units: "secs"
+  TR: 2.5
+  extraIsValid: ""
+
+  # Column names in the behavioural CSV that should be used as event onsets.
+  stanOnsetName:
+    "1": "onsets_outcome"
+
+  # Parametric modulators for the first-level model.
+  pmod:
+    name:
+      "1": "outcomes"
+    poly:
+      "1": 1
+
+  # Optional additional nuisance/task regressors. Leave empty when unused.
+  regressor_paths:
+    "1": ""
+
+  point_estimate_name: ""
+
+  # SPM orthogonalisation flag for each parametric modulator.
+  ort:
+    "1": 1
+
+  contrasts:
+    "1":
+      name: "positive"
+      weights: [0, 1, 0, 0, 0, 0, 0, 0]
+    "2":
+      name: "negative"
+      weights: [0, -1, 0, 0, 0, 0, 0, 0]
+
+analysis_pipeline:
+  analysis_name: "onsets_outcome_outcome"
+  run_first_level: true
+  first_level_job: "firstlevelanalysis_job_default"
+  groups2stest_path: ["/media/Storage_HDD/Post_Doc/Painstorm/02_SPM_image_analysis/groups.csv"]
+  regression_params_path: "/media/Storage_HDD/Post_Doc/Painstorm/02_SPM_image_analysis/scores_means.csv"

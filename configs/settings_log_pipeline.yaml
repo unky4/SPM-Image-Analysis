@@ -1,0 +1,53 @@
+# Example log-conversion settings.
+#
+# Presentation logs are stored alongside each subject in the BIDS dataset:
+#
+#   sub-001/log/sub-001_run1.mat
+#   sub-001/log/sub-001_run2.mat
+#
+# The run number is treated as the behavioural equivalent of the fMRI BIDS run.
+# The code also accepts .txt logs when log2stan.logExtension is set to txt.
+
+resmem: true
+saveRoot: "/path/to/spm_image_analysis"
+
+bids:
+  enabled: true
+  root: "/path/to/BIDS"
+  runs: [1, 2]
+  subject_labels: []       # Optional: ["001", "002"]. Leave empty to use all sub-* folders.
+
+log_pipeline:
+  output_dir: "/path/to/behaviour_tables"
+  file_name: "data_combined_image_analysis"
+  logs:
+    source: "bids"         # Read logs from sub-*/log/.
+    folder: "log"          # The log folder inside each subject folder.
+  merge_inputs: []
+  merge_output_path: ""
+
+log2stan:
+  logExtension: "mat"      # Use mat or txt depending on Presentation output.
+  timeScaler: 0.001        # Convert Presentation time units to seconds.
+  minResponseTime: 0.1
+  maxResponseTime: 3.0
+  Phrases:
+    newSession:
+      "1": "Trial"
+    isInstrumental:
+      "1": "instrumental"
+    picturePresent:
+      "1": "picture"
+    badTrial:
+      "1": "bad_trial"
+  displayName:
+    "1": "condition_a"
+  displayNameInd:
+    "1": 1
+  groupByNames:
+    "1": "condition_a"
+  feedbacks:
+    "1": "feedback"
+  reinforcements:
+    "1": 1
+  OrderIndicators: {}

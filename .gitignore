@@ -1,0 +1,8 @@
+*.asv
+*.mat
+*.nii
+*.nii.gz
+SPM.mat
+.DS_Store
+results/
+output/

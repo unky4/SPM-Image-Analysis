@@ -1,0 +1,14 @@
+# Batch wrapper for running several first- and second-level analyses.
+# Each item in analyses expects settings_<analysis>.yaml in settings_dir.
+batch_pipeline:
+  main_dir: "/media/Storage_HDD/Post_Doc/Painstorm/02_SPM_image_analysis"
+  settings_dir: "/media/Storage_HDD/Post_Doc/Painstorm/02_SPM_image_analysis"
+  groups2stest_path: "/media/Storage_HDD/Post_Doc/Painstorm/02_SPM_image_analysis/groups.csv"
+  regression_params_path: "/media/Storage_HDD/Post_Doc/Painstorm/02_SPM_image_analysis/scores_means.csv"
+  analyses:
+    - "onsets_button_press_time_chosen_value"
+    - "onsets_button_press_time_chosen_value_loss"
+    - "onsets_button_press_time_chosen_value_reward"
+    - "onsets_outcome_pe"
+    - "onsets_outcome_pe_loss"
+    - "onsets_outcome_pe_reward"

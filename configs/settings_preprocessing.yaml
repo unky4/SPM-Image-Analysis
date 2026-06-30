@@ -1,0 +1,29 @@
+# Example preprocessing settings for SPM Image Analysis.
+# YAML is used so settings files can be documented with comments.
+#
+# The imaging input is assumed to be a BIDS dataset. The code handles BIDS
+# filename entities such as sub-, task-, run-, and the final suffix internally.
+# For tasks split across multiple scanner acquisitions, list those acquisitions
+# as BIDS runs. In the original scripts these were called sessions.
+
+resmem: true
+spmPath: "/media/Storage_HDD/Post_Doc/spm12/"
+saveRoot: "/media/Storage_HDD/Post_Doc/Painstorm/02_SPM_image_analysis/"
+nofSlicesToDiscard: 4
+
+bids:
+  enabled: true
+  root: "/media/Storage_HDD/Post_Doc/Painstorm/00_data/BIDS"
+  suffix: "bold"          # Functional MRI files usually end in _bold.nii or _bold.nii.gz.
+  runs: [1, 2]             # The task was split into two acquisitions.
+                          # The code supports both standard *_run-01_bold.nii files
+                          # and project-style task labels such as *_task-run1_bold.nii.
+  subject_labels: []       # Optional: ["001", "002"]. Leave empty to use all sub-* folders.
+
+# Optional filters. Use these only when the BIDS root contains multiple
+# derivative files for the same subject/run. Do not set task for datasets where
+# the run number is encoded as task-run1, task-run2, etc.; those are detected
+# automatically and task-rest is ignored.
+# task: "painstorm"              # For standard files like _task-painstorm_run-01_bold.nii.
+# space: "MNI152NLin2009cAsym"   # Matches _space-MNI152NLin2009cAsym.
+# desc: "preproc"                # Matches _desc-preproc.
